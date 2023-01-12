@@ -26,13 +26,13 @@ local function TPReturner(placeId)
 	if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
 		foundAnything = Site.nextPageCursor
 	end
-	local num = 25;
+	local num = 20;
 	for i,v in pairs(Site.data) do
 		local Possible = true
 		ID = tostring(v.id)
 		if tonumber(v.maxPlayers) > tonumber(v.playing) then
 			for _,Existing in pairs(AllIDs) do
-				if num ~= 0 then
+				if num ~= 20 then
 					if ID == tostring(Existing) then
 						Possible = false
 					end
@@ -45,7 +45,7 @@ local function TPReturner(placeId)
 						end)
 					end
 				end
-				num = num - 1
+				num = num + 1
 			end
 			if Possible == true then
 				table.insert(AllIDs, ID)
