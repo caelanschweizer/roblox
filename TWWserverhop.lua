@@ -4,8 +4,8 @@ if type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
 x[#x + 1] = v.id
 end
 end
-if #x > 18 then
-game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(18, #x)])
+if #x > 0 then
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
 else
 return notify("Serverhop","Couldn't find a server.")
 end
