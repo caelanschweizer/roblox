@@ -1,10 +1,11 @@
-local Request = game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")
-    local DataDecoded,Servers = HttpService:JSONDecode(Request).data,{}
-    for Index,ServerData in ipairs(DataDecoded) do
-        if type(ServerData) == "table" and ServerData.id ~= game.JobId then
-            table.insert(Servers,ServerData.id)
-        end
-    end
-    if #Servers > 0 then
-        TeleportService:TeleportToPlaceInstance(game.PlaceId, Servers[math.random(1, #Servers)])
-    end
+local x = {}
+for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+if type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
+x[#x + 1] = v.id
+end
+end
+if #x > 18 then
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(18, #x)])
+else
+return notify("Serverhop","Couldn't find a server.")
+end
